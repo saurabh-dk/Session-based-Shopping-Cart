@@ -14,11 +14,11 @@ public class ShoppingDBConnection {
 		HikariDataSource ds=null;
 		if(datasource==null){
 			
-			File file = new File("resources/config.properties");
+			/*File file = new File("resources/config.properties");
 			String absolutePath = file.getAbsolutePath();
 			absolutePath =absolutePath.replace("\\", "/");
-			
-			HikariConfig config = new HikariConfig(absolutePath);
+			*/
+			HikariConfig config = new HikariConfig("/config.properties");
 			
 			ds = new HikariDataSource(config);
 			

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="java.util.*,Model.ProductBean" %>
+    <%@ page import="java.util.*,Model.ProductBean" import="Controller.ShoppingBasketContoller" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,8 +9,11 @@
 </head>
 <body>
 <%
+
 if(getServletContext().getAttribute("products")==null){
-	//message
+	RequestDispatcher rd;
+	rd = request.getRequestDispatcher("/ShoppingBasketContoller");
+	rd.forward(request,response);
 	out.print("No products in Database");
 }
 else

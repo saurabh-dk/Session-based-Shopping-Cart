@@ -44,7 +44,7 @@ public class ShoppingBasketContoller extends HttpServlet {
 			productsHm = new ShoppingBasketDBInteractions().getAllProductDetails();
 			
 			getServletContext().setAttribute("products", productsHm);
-		} catch (SQLException | IOException |PropertyVetoException  e) {
+		} catch (SQLException | IOException |PropertyVetoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
