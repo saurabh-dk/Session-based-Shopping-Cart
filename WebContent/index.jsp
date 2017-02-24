@@ -19,38 +19,34 @@ if(getServletContext().getAttribute("products")==null){
 else
 {
 %>
-<form method=POST action="ShoppingBasketContoller">
+
 		<br>
-		Please enter item to add or remove:
+		Available products:
 		<br>
-		<br>
-		Add Item:
-		<SELECT NAME="items">
+		<center>
+		<form action="ShoppingBasketContoller" method=POST>
+		<input align="right" type=submit value='View' name=submitButton>
+		</form>
+		</center>
 			<% 
-			HashMap<Integer,ProductBean> productsHm;
-			productsHm=(HashMap<Integer,ProductBean>)getServletContext().getAttribute("products");
+			HashMap<Integer,ProductBean> productsHm=(HashMap<Integer,ProductBean>)getServletContext().getAttribute("products");
+			out.print("<table>");
 			for(Map.Entry<Integer,ProductBean> m:productsHm.entrySet()){
 				int key = m.getKey();
 				ProductBean pb = m.getValue();
-				out.print("<OPTION value='"+pb.getId()+"'>"+pb.getName()+"");
-				}
-			%>
-			</SELECT>
-			<br>
-			<br>
-		Select quantity:
-			<br>
-			<INPUT TYPE="number" name="quantity" value="1">
-			<br>
-			<br>
-			
-		<INPUT TYPE=submit value="Add" name="submitButton">
-		<INPUT TYPE=submit value="Remove" name="submitButton">
-		<INPUT TYPE=submit value="View" name="submitButton">
-		
-	</form>
-	<br>
-	<%
+				%>
+				<form method=POST action="productInfo.jsp">
+				<%
+				out.print("<tr><td><br><img src='"+pb.getImageUrl()+
+							"'style='width:auto;max-height:128px;padding:5px;align=center;'></td><td><br><hr width='1' size='128'></td><td>"
+							+pb.getName()+"<input type='hidden' name='productId' value='"
+							+pb.getId()+"'><input type='hidden' name='productName' value='"
+							+pb.getName()+"'><br><br><input type='submit' value='View' name='view'></td></tr>");
+				%>
+				</form>
+				<%
+			}
+			out.print("</table>");
 	}%>
 </body>
 </html>
