@@ -1,3 +1,13 @@
+
+
+
+
+
+
+<!-- DEPRECATED
+NOT BEING USED ANYMORE
+ -->
+
 <%@ page language="java" import="Model.ProductBean" contentType="text/html; charset=ISO-8859-1 "
     pageEncoding="ISO-8859-1"%>
  
