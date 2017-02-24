@@ -31,7 +31,7 @@
 		productDetails=(HashMap<Integer,ProductBean>)application.getAttribute("products");
 		out.print("You have selected the following product(s) <br/>");
 		out.print("<table>");
-		out.print("<tr><th>Product Name</th><th>Quantity</th><th>Unit Price</th><th>Total Price</th></tr>");
+		out.print("<tr><th>Product Name</th><th>Quantity</th><th>Unit Price</th><th>Total Price</th><th>Remove?</th></tr>");
 		for(Map.Entry<Integer,PurchaseProductBean> m : addedProducts.entrySet()){
 			out.print("<tr>");
 			pb=productDetails.get(m.getKey());
@@ -47,6 +47,8 @@
 			out.print("<td>"+productQuantity+"</td>");
 			out.print("<td>"+unitPrice+"</td>");
 			out.print("<td>"+totalPrice+"</td>");
+			out.print("<td><form action='ShoppingBasketContoller' method=POST><input type='hidden' name='items' value='"
+						+m.getKey()+"'><input type=submit value='Remove' name='submitButton'></form></td>");
 			out.print("</tr>");
 		}
 		
@@ -56,10 +58,8 @@
 		else out.print("Sorry no products found in cart");
 	}
 	else{
-		out.print("Sorry no products found in cart");
-		
+		out.print("Sorry no products found in cart");	
 	}
-	
 
 %>
 <br/><form action='index.jsp' method='POST'><input type='submit'value='Back to shopping'  /></form>
