@@ -72,7 +72,7 @@ public class ShoppingBasketContoller extends HttpServlet {
 				
 				 int count=AddToCart.execute(request,response);//To add product in session
 				 request.setAttribute("quantity", count);
-				 rd=request.getRequestDispatcher("addtocart.jsp");
+				 rd=request.getRequestDispatcher("view.jsp");
 				 rd.forward(request, response);
 				
 			}
@@ -80,7 +80,7 @@ public class ShoppingBasketContoller extends HttpServlet {
 				
 				 String removedProductId=RemoveFromCart.execute(request, response);
 				 request.setAttribute("removedProductId", removedProductId);
-				 rd=request.getRequestDispatcher("removefromcart.jsp");
+				 rd=request.getRequestDispatcher("view.jsp");
 				 rd.forward(request, response);
 			}
 			else if(checkAction.startsWith("View")){

@@ -17,41 +17,41 @@ public class ShoppingBasketDBInteractions {
 	
 	public HashMap<Integer,ProductBean> getAllProductDetails() throws SQLException, IOException, PropertyVetoException{
 		
-		
-		
 		HashMap<Integer,ProductBean> productsHm = new HashMap<>();
 		
-		//ShoppingDBConnection.connection();
 		try{
-		 //connection = ShoppingDBConnection.getInstance().getConnection();
-			connection = ShoppingDBConnection.getDataSource().getConnection();
+		 
+		connection = ShoppingDBConnection.getDataSource().getConnection();
 		statement = connection.createStatement(); 
 		
 		resultSet = statement.executeQuery("select * from products");
 		
 			while (resultSet.next()){
+				
 				ProductBean pb = new ProductBean();
 				pb.setId(resultSet.getInt("id"));
 				pb.setName(resultSet.getString("name"));
 				pb.setProductDescription(resultSet.getString("description"));
 				pb.setProductPrice(resultSet.getDouble("price"));
+				pb.setImageUrl(resultSet.getString("image_URL"));
 				productsHm.put(pb.getId(), pb);
 				
 			}
 		}//end of try
+		
 		finally{
-			
-			
 			if (resultSet != null) try { resultSet.close(); } catch (SQLException e) {e.printStackTrace();}
             if (statement != null) try { statement.close(); } catch (SQLException e) {e.printStackTrace();}
             if (connection != null) try { connection.close(); } catch (SQLException e) {e.printStackTrace();}
 		}
 		return productsHm;
-		
+
 	}
 	
 	public int generateOrder(OrderBean ob){
+		
 		int acknowledgment =0;
+		
 		try {
 			//connection = ShoppingDBConnection.getInstance().getConnection();
 			connection = ShoppingDBConnection.getDataSource().getConnection();
@@ -88,9 +88,9 @@ public class ShoppingBasketDBInteractions {
 			
 			 if(resultSet.first())
 				 {
-					 check=true;
-					 int orderId=resultSet.getInt("order_id");
-					 System.out.println(orderId);
+					check=true;
+					int orderId=resultSet.getInt("order_id");
+					System.out.println(orderId);
 					ob.setOrderId(orderId);
 				 }
 			 
@@ -100,18 +100,20 @@ public class ShoppingBasketDBInteractions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		finally{
-			if (resultSet != null) try { resultSet.close(); } catch (SQLException e) {e.printStackTrace();}
-			
-			 if (pst != null) try { pst.close(); } catch (SQLException e) {e.printStackTrace();}
-			 if (connection != null) try { connection.close(); } catch (SQLException e) {e.printStackTrace();}
+			if (resultSet != null) try { resultSet.close(); } catch (SQLException e) {e.printStackTrace();}	
+			if (pst != null) try { pst.close(); } catch (SQLException e) {e.printStackTrace();}
+			if (connection != null) try { connection.close(); } catch (SQLException e) {e.printStackTrace();}
 		}
 		 return check;
 		
 	}
 	
 	public int insertPurchasedProducts(OrderBean ob){
+		
 		int acknowledgment =0;
+		
 		try {
 			//connection = ShoppingDBConnection.getInstance().getConnection();
 			connection = ShoppingDBConnection.getDataSource().getConnection();
@@ -120,31 +122,27 @@ public class ShoppingBasketDBInteractions {
 			String query="Insert into purchasedproduct (total_price,quantity,order_id,product_id) values(?,?,?,?)";
 			pst=connection.prepareStatement(query);
 			
-
 			HashMap<Integer, PurchaseProductBean> PurchaseProduct=ob.getProducts();
-			
 			
 			int orderId=ob.getOrderId();
 			int productId=0;
 			double totalPrice=0.0;
 			int quantity=0;
+			
 			for(Map.Entry<Integer, PurchaseProductBean> product:PurchaseProduct.entrySet() ){
 				
 				ppb=product.getValue();
 				productId=ppb.getProductId();
 				totalPrice=ppb.getTotalPrice();
 				quantity=ppb.getQuantity();
-				
-				
+					
 				pst.setDouble(1, totalPrice);
 				pst.setInt(2, quantity);
 				pst.setInt(3, orderId);
 				pst.setInt(4, productId);
 				acknowledgment=pst.executeUpdate();
-				
-				
+							
 			}
-			
 			
 		} catch (SQLException  e) {
 			// TODO Auto-generated catch block
@@ -156,6 +154,4 @@ public class ShoppingBasketDBInteractions {
 		}
 		return acknowledgment;
 	}
-	
-	
 }

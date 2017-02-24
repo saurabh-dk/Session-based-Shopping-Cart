@@ -3,11 +3,9 @@ package Model;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class RemoveFromCart {
 
-	static	private HashMap<Integer,PurchaseProductBean> removeProduct;
 	
 	public static String execute(HttpServletRequest request,HttpServletResponse response){
 		

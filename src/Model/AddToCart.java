@@ -4,12 +4,9 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class AddToCart {
-	
-	static	private HashMap<Integer,PurchaseProductBean> addProducts;
-	
+		
 	public static int execute(HttpServletRequest request,HttpServletResponse response){
 		
 		int acknowledgement=0;
@@ -38,7 +35,6 @@ public class AddToCart {
 			
 			if(addProduct.size()>0 && addProduct.containsKey(selectedProductId) ){
 				PurchaseProductBean ppb=addProduct.get(selectedProductId);
-				ppb=addProduct.get(selectedProductId);
 				ppb.setQuantity(quantity);
 				addProduct.put(selectedProductId,ppb);
 			}

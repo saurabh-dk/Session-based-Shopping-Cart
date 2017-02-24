@@ -8,39 +8,36 @@ public class ProductBean implements Serializable {
 	private String productName;
 	private String productDescription;
 	private double productPrice;
+	private String imageUrl;
 	
-	public void setId(int id)
-	{
+	public void setId(int id){
 		productId=id;
-		
 	}
-	public int getId()
-	{
+	public int getId(){
 		return productId;
 	}
-	public void setName(String name)
-	{
+	public void setName(String name){
 		productName=name;
 	}
-	public String getName()
-	{
+	public String getName(){
 		return  productName;
 	}
-	
-	public void setProductDescription(String desc)
-	{
+	public void setProductDescription(String desc){
 		productDescription=desc;
 	}
-	public String getProductDescription()
-	{
-		return  productName;
+	public String getProductDescription(){
+		return  productDescription;
 	}
-	 public void setProductPrice(double price)
-	 {
+	public void setProductPrice(double price){
 		 productPrice=price;
 	 }
-	 public double getProductPrice()
-	 {
+	 public double getProductPrice(){
 		 return productPrice;
+	 }
+	 public void setImageUrl(String url){
+		 imageUrl = url;
+	 }
+	 public String getImageUrl(){
+		 return imageUrl;
 	 }
 }
